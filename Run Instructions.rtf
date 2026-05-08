@@ -1,0 +1,96 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;\f2\fmodern\fcharset0 Courier;
+\f3\fswiss\fcharset0 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;\red251\green2\blue7;\red0\green0\blue255;\red0\green0\blue0;
+}
+{\*\expandedcolortbl;;\cssrgb\c100000\c14913\c0;\cssrgb\c1680\c19835\c100000;\csgray\c0\c0;
+}
+\paperw11900\paperh16840\vieww12000\viewh15420\viewkind0
+\hyphauto1\hyphfactor90
+\deftab720
+\pard\pardeftab720\sa180\partightenfactor0
+
+\f0\b\fs36 \cf2 Run Instructions (Aerospace Robotics Lab - Georgia Tech)\
+\pard\pardeftab720\sa180\partightenfactor0
+
+\fs24 \cf0 Leo Rover Documentation:
+\f1\b0 \uc0\u8232 https://docs.fictionlab.pl/leo-rover/documentation\
+\pard\pardeftab720\sa180\partightenfactor0
+
+\f0\b\fs32 \cf3 \cb4 To connect to the Leo rover\
+\pard\tx360\pardeftab720\li360\fi-360\partightenfactor0
+
+\f1\b0\fs24 \cf0 \cb1 \'95	Turn it on by pressing the button on the right. It will flash green.\
+\'95	Connect to the Wi-Fi network 
+\f2 LeoRover-###
+\f1 . Password: 
+\f2 password
+\f1 \
+\'95	SSH into the rover: 
+\f2 ssh pi@10.0.0.1 / 
+\f1 Password: 
+\f2 raspberry
+\f1 \
+\'95	To access the web interface, open a browser and go to 
+\f2 10.0.0.1
+\f1 .\
+\'95	To disconnect, type 
+\f2 exit
+\f1  in the terminal. Then press the rover button again to turn it off.\
+\pard\tx360\pardeftab720\li360\fi-360\partightenfactor0
+
+\f2 \cf0 \
+\pard\pardeftab720\sa180\partightenfactor0
+
+\f0\b\fs32 \cf3 How to run\
+\pard\pardeftab720\sa180\partightenfactor0
+
+\fs24 \cf0 Source ROS and the workspace:\
+
+\f2\b0 source /opt/ros/jazzy/setup.bash\uc0\u8232 source /home/ws/install/setup.bash
+\f0\b\fs32 \
+\pard\pardeftab720\sa180\partightenfactor0
+
+\fs24 \cf0 Terminal 1:\
+\pard\pardeftab720\sa180\partightenfactor0
+
+\f2\b0 \cf0 ros2 launch zed_wrapper zed_camera.launch.py\
+\pard\pardeftab720\sa180\partightenfactor0
+
+\f3\i \cf0 -> publishes raw point cloud from the ZED camera
+\f1\i0 \
+
+\f0\b Terminal 2:\
+\pard\pardeftab720\sa180\partightenfactor0
+
+\f2\b0 \cf0 ros2 run rover_perception cloud_to_target_frame --ros-arg -r /point_cloud/cloud_registered:=/zed/zed_node/point_cloud/cloud_registered\
+\pard\pardeftab720\sa180\partightenfactor0
+
+\f3\i \cf0 -> transforms the point cloud into the target frame
+\f1\i0 \
+
+\f0\b Terminal 3:\
+\pard\pardeftab720\sa180\partightenfactor0
+
+\f2\b0 \cf0 ros2 run rover_perception height_costmap\
+\pard\pardeftab720\sa180\partightenfactor0
+
+\f3\i \cf0 -> publishes occupancy grid 
+\f1\i0 \
+
+\f0\b Terminal 4:\
+\pard\pardeftab720\sa180\partightenfactor0
+
+\f2\b0 \cf0 ros2 run rover_scp map_publisher_node --ros-args -p start_x:=10 -p start_y:=10 -p end_x:=90 -p end_y:=90\
+\pard\pardeftab720\sa180\partightenfactor0
+
+\f3\i \cf0 -> publishes map metadata and SDF grid 
+\f1\i0 \
+
+\f0\b Terminal 5:\
+\pard\pardeftab720\sa180\partightenfactor0
+
+\f2\b0 \cf0 ros2 run rover_scp rover_pp_node\
+\pard\pardeftab720\partightenfactor0
+
+\f3\i \cf0 -> C++ planning node that runs SCP and publishes trajectory-generated control commands to the rover on /cmd_vel}

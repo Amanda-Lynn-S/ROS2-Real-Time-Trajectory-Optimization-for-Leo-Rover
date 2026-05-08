@@ -1,0 +1,29 @@
+src/
+├── rover_scp/
+│   ├── package.xml
+│   ├── CMakeLists.txt              <- mixed Python + C++ build file
+│   ├── setup.py                    <- used for Python package installation
+│   ├── setup.cfg
+│   ├── include/
+│   │   └── rover_scp/
+│   │       ├── rover_model.hpp     <- C++ rover dynamics + discretization declarations
+│   │       ├── rover.hpp           <- C++ Rover class declarations
+│   │       └── scp.hpp             <- C++ SCP planner declarations
+│   ├── src/
+│   │   ├── rover_model.cpp         <- replaces rover_model.py
+│   │   ├── rover.cpp               <- replaces Rover.py
+│   │   ├── scp.cpp                 <- replaces SCP.py
+│   │   └── rover_pp_node.cpp       <- replaces rover_pp_node.py
+│   └── rover_scp/                  
+│       ├── __init__.py             <- empty, just needs to exist
+│       └── map_publisher_node.py   
+│
+└── rover_perception/
+     ├── package.xml
+     ├── setup.py
+     ├── setup.cfg
+     └── rover_perception/
+         ├── __init__.py
+         ├── mock_cloud_pub.py
+         ├── cloud_to_target_frame.py
+         └── height_costmap.py
