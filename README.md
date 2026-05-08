@@ -86,7 +86,7 @@ The perception stack used can be found here: https://github.com/SujayCh07/rover_
                     (builds C++ Rover + SCP, runs optimizer)
                                      │
             ┌────────────────────────┼─────────────────────────┐
-            ▼                        ▼ 						  ▼
+            ▼                        ▼ 						   ▼
 /scp_trajectory_states    /scp_trajectory_controls  			 /cmd_vel
   (full state traj)         (full control traj)    				(Leo Rover)
 
