@@ -80,15 +80,15 @@ The perception stack used can be found here: https://github.com/SujayCh07/rover_
   map_publisher_node
   (binarize → compute SDF → publish)
   ├──▶ /map_meta   (JSON metadata)  ─┐
-  └──▶ /sdf_grid   (SDF array)     	      ──┤
-                                      				     ▼
-                              			         rover_pp_node.cpp
-                              		   (builds C++ Rover + SCP, runs optimizer)
-                                      				     │
-                  ┌──────────────┼───────────────────┐
-                  ▼                   				     ▼ 								 ▼
-     /scp_trajectory_states  		    /scp_trajectory_controls  					    /cmd_vel
-       (full state traj)           	                  (full control traj)    						  (Leo Rover)
+  └──▶ /sdf_grid   (SDF array)     ──┤
+                         				     ▼
+                              rover_pp_node.cpp
+                    (builds C++ Rover + SCP, runs optimizer)
+                                     │
+            ┌────────────────────────┼─────────────────────────┐
+            ▼                        ▼ 								         ▼
+/scp_trajectory_states    /scp_trajectory_controls  			 /cmd_vel
+  (full state traj)         (full control traj)    				(Leo Rover)
 
 ```
 
