@@ -6,6 +6,7 @@ It follows the methodology of "GuSTO: Guaranteed Sequential Trajectory Optimizat
 The system is implemented as a **ROS2 Jazzy** application split across three packages: **`zed-ros2-wrapper package`** (publishing real-time point cloud from camera), **`rover_perception`** (point cloud processing and occupancy grid generation), and **`rover_scp`** (map bridging and trajectory optimization). Each major component runs as a ROS2 node communicating via published and subscribed topics. The perception stack produces a live occupancy grid, the map node bridges it into SDF+metadata, the planning node consumes those to run SCP, and the resulting trajectory is streamed to the rover via `/cmd_vel`.
 
 The codebase is the real-time ROS2 application extension of the following project: https://github.com/Amanda-Lynn-S/ROS2-Trajectory-Optimization-for-Leo-Rover
+
 The perception stack used can be found here: https://github.com/SujayCh07/rover_perception/tree/main
 
 ---
